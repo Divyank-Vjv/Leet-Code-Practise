@@ -1,0 +1,49 @@
+67. Add Binary
+Given two binary strings a and b, return their sum as a binary string.
+
+Example 1:
+Input: a = "11", b = "1"
+Output: "100"
+
+Example 2:
+Input: a = "1010", b = "1011"
+Output: "10101"
+
+Constraints:
+1 <= a.length, b.length <= 104
+a and b consist only of '0' or '1' characters.
+Each string does not contain leading zeros except for the zero itself.
+
+Solution 01----
+
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        t=0
+        if(len(a)>len(b)):
+            b='0'*(len(a)-len(b))+b
+        elif(len(a)<len(b)):
+            a='0'*(len(b)-len(a))+a
+        z=''
+        at=a[::-1]
+        bt=b[::-1]
+        for x in range(len(at)):
+            y=int(at[x])+int(bt[x])+t
+            if y==2 and x<len(at)-1:
+                t=1
+                z='0'+z
+            elif y==3 and x<len(at)-1:
+                z='1'+z
+                t=1
+            elif y==3 and x==len(at)-1:
+                z='11'+z
+            elif y==2 and x==len(at)-1:
+                z='10'+z
+            elif y in [0,1]:
+                t=0
+                z=str(y)+z
+                
+            
+        return z
+        
+
+Solution 02 -----
